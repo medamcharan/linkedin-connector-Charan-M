@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
 
+import React from 'react';
+import './App.css'; 
 function App() {
+  const sendConnectRequest = () => {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      chrome.tabs.sendMessage(tabs[0].id, "connect_with_all");
+    });
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>LinkedIn Connector</h1>
+      <p>Click the button to start connecting with profiles automatically.</p>
+      <button onClick={sendConnectRequest} className="connect-button">
+        Connect with All
+      </button>
     </div>
   );
 }
